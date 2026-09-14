@@ -1,0 +1,56 @@
+{
+  "name": "shrinkray",
+  "version": "0.1.0",
+  "description": "ShrinkRay — compress video for Discord / WhatsApp / Telegram 100% in your browser. No upload, private by design.",
+  "keywords": [
+    "ffmpeg-wasm",
+    "video-compressor",
+    "discord",
+    "whatsapp",
+    "telegram",
+    "nextjs",
+    "privacy"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiraadityaa/shrinkray.git"
+  },
+  "private": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "postinstall": "npm run copy:ffmpeg",
+    "prebuild": "npm run copy:ffmpeg",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "copy:ffmpeg": "node scripts/copy-ffmpeg.mjs"
+  },
+  "dependencies": {
+    "@ffmpeg/core-mt": "^0.12.10",
+    "@ffmpeg/core-st": "^0.11.1",
+    "@ffmpeg/ffmpeg": "^0.12.1",
+    "@ffmpeg/util": "^0.12.1",
+    "next": "15.5.9",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.9",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^2.1.9"
+  }
+}
