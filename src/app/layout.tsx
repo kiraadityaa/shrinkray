@@ -19,8 +19,9 @@ export const metadata: Metadata = {
 };
 
 // Runs before hydration so the correct Catppuccin flavour is painted
-// on the very first frame (no light/dark flash).
-const flavourBootstrap = `(function(){try{var s=localStorage.getItem('${FLAVOUR_KEY}');var r=(s==='latte'||s==='mocha')?s:(matchMedia('(prefers-color-scheme: dark)').matches?'mocha':'latte');document.documentElement.classList.add(r);document.documentElement.style.colorScheme=r==='mocha'?'dark':'light';}catch(e){}})();`;
+// on the very first frame (no light/dark flash). `?flavour=latte|mocha`
+// wins for shareable preview links, then the stored choice, then the OS.
+const flavourBootstrap = `(function(){try{var q=new URLSearchParams(location.search).get('flavour');var s=localStorage.getItem('${FLAVOUR_KEY}');var r=(q==='latte'||q==='mocha')?q:((s==='latte'||s==='mocha')?s:(matchMedia('(prefers-color-scheme: dark)').matches?'mocha':'latte'));if(q==='latte'||q==='mocha')localStorage.setItem('${FLAVOUR_KEY}',q);document.documentElement.classList.add(r);document.documentElement.style.colorScheme=r==='mocha'?'dark':'light';}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
