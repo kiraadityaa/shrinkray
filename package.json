@@ -36,11 +36,14 @@
     "@ffmpeg/core-st": "^0.11.1",
     "@ffmpeg/ffmpeg": "^0.12.1",
     "@ffmpeg/util": "^0.12.1",
+    "@phosphor-icons/react": "^2.1.10",
+    "motion": "^13.2.0",
     "next": "15.5.9",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@catppuccin/tailwindcss": "^1.0.0",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

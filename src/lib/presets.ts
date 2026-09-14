@@ -62,3 +62,9 @@ export const PRESETS: Preset[] = [
 export function getPreset(slug: string): Preset {
   return PRESETS.find((p) => p.slug === slug) ?? PRESETS[0];
 }
+
+/** Compact size chip, e.g. "10.0 MB" / "512.0 MB" (GB-aware). */
+export function formatPresetSize(p: Preset): string {
+  if (p.maxBytes >= 1024 * 1024 * 1024) return `${(p.maxBytes / 1024 / 1024 / 1024).toFixed(1)} GB`;
+  return `${(p.maxBytes / 1024 / 1024).toFixed(1)} MB`;
+}

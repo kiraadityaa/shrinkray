@@ -1,26 +1,52 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "@catppuccin/tailwindcss/mocha.css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  @apply bg-ctp-base text-ctp-text antialiased;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  @apply bg-ctp-mauve text-ctp-base;
+}
+
+/* Visible keyboard focus everywhere — Mauve ring on both flavours. */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--ctp-mauve);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Quiet scrollbars that match the flavour. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ctp-surface1) transparent;
+}
+
+/* Indeterminate shimmer for unknown-duration work (probing).
+   transform/opacity only; disabled under reduced motion. */
+@keyframes shrinkray-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: no-preference) {
+  .shrinkray-shimmer {
+    animation: shrinkray-shimmer 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .shrinkray-translucent {
+    backdrop-filter: none;
+  }
 }

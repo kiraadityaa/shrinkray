@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 import Compressor from "@/components/Compressor";
-import { PRESETS, getPreset } from "@/lib/presets";
+import { PRESETS, formatPresetSize, getPreset } from "@/lib/presets";
 
 export async function generateStaticParams() {
   return PRESETS.map((p) => ({ preset: p.slug }));
@@ -20,15 +23,26 @@ export default async function ToolPage({ params }: { params: Promise<{ preset: s
   const { preset: slug } = await params;
   const p = getPreset(slug);
   return (
-    <div className="min-h-screen font-sans">
-      <header className="max-w-3xl mx-auto px-6 pt-10 pb-4">
-        <Link href="/" className="text-sm text-emerald-600 hover:underline">← ShrinkRay</Link>
-        <h1 className="text-3xl sm:text-4xl font-extrabold mt-2">{p.label} Video Compressor</h1>
-        <p className="opacity-70 mt-2">{p.tagline}. Free, no signup — your file never leaves your device.</p>
-      </header>
-      <main className="px-6 pb-16">
+    <div className="min-h-screen">
+      <SiteNav />
+      <main className="mx-auto max-w-7xl px-4 pb-16 sm:px-6">
+        <div className="pt-10 pb-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 font-mono text-xs text-ctp-subtext0 transition hover:text-ctp-mauve"
+          >
+            <ArrowLeft size={14} aria-hidden />
+            shrinkray_
+          </Link>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tighter sm:text-4xl">{p.label} Video Compressor</h1>
+          <p className="mt-2 max-w-[60ch] text-[15px] leading-relaxed text-ctp-subtext1">
+            {p.tagline}. Free, no signup — encoded on your device, never uploaded.{" "}
+            <span className="font-mono text-ctp-mauve">≤{formatPresetSize(p)}</span>
+          </p>
+        </div>
         <Compressor initialPreset={p.slug} />
       </main>
+      <SiteFooter />
     </div>
   );
 }
