@@ -22,10 +22,15 @@ body {
   border-radius: 4px;
 }
 
-/* Quiet scrollbars that match the flavour. */
+/* No visible scrollbars anywhere — scrolling still works via wheel,
+   touch, trackpad, and keyboard; the UI just stays clean. */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: var(--ctp-surface1) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 /* Indeterminate shimmer for unknown-duration work (probing).
